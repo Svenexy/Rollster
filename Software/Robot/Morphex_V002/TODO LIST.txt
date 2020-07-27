@@ -1,0 +1,64 @@
+TODO LIST
+
+
+VOETEN (BOTTUM)
+
+- Maken van een functie waarmee je de robot kan laten vergroten en verkleinen
+	- de hoeken van de servo op de arm moeten mee compenseren.
+
+- Maken van een functie om de robot voor uit te ta laten rollen -> Daarna een sturen.
+	- 
+- Maken van een functie om de plek van de voeten te bereken in een bepaalde path.
+	- deze dan laten uitvoeren door een andere functie die dan de positie van de servo's en de voeten dan ook op slaat
+
+
+ARMEN (TOP)
+
+- Begin / Reset functie (kan in de zelfde functie als die van de BOTTUM).
+	- wat zijn de nul punten??
+	- 
+- Moeten hiervoor berekenen komen ja of nee?? (denk zelf niet).
+
+
+
+
+
+
+
+
+
+
+SERVO TYPE
+0 - TABIA
+1 - FEMUR
+2 - COXA
+3 - TABIA
+4 - FEMUR
+5 - COXA
+6 - TABIA
+7 - FEMUR
+8 - COXA
+9 - TABIA
+10 - FEMUR
+11 - COXA
+12 - TABIA
+13 - FEMUR
+14 - COXA
+15 - TABIA
+16 - FEMUR
+17 - COXA
+18 - SHOULDER
+19 - ELBOW
+20 - SHOULDER
+21 - ELBOW
+22 - SHOULDER
+23 - ELBOW
+24 - SHOULDER
+25 - ELBOW
+26 - SHOULDER
+27 - ELBOW
+28 - SHOULDER
+29 - ELBOW
+30 - WALROLE
+
+

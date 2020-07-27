@@ -1,0 +1,31 @@
+// Het bereken van de hoeken van de voeten op basis van de gegeven x,y,z positie..
+pointLeg* Morphex_Utils::traceLeg (uint8_t leg, float x, float y, float z, int resolution, uint8_t shape) {
+
+  float L1 = sqrt(pow(x,2) + pow(y,2));
+  float L = sqrt(pow(z,2) + pow((L1 - Coxa),2));
+
+  float gamma = atan2(x,y);
+  gamma = RadDeg(gamma) + 45 ;
+
+  float alpha_1 = acos( z / L );
+  alpha_1 = RadDeg(alpha_1);
+  float alpha_2 = acos( (pow(L,2) + pow(Femur,2) - pow(Tibia,2) ) / (2*Femur*L) );
+  alpha_2 = RadDeg(alpha_2);
+  float alpha = alpha_1 + alpha_2;
+
+  float beta = acos( (pow(Tibia,2) + pow(Femur,2) - pow(L,2) ) / (2*Tibia*Femur) );
+  beta = (beta*180)/PI;
+  
+  #ifdef DEBUG
+    Serial.print("\n\t\tTrace parameters:\tL1\tL\tgamma\talpha\tbeta");
+    Serial.print("\n\t\t\t\t\t" + (String)L1 + "\t" + (String)L + "\t" + (String)gamma + "\t" + (String)alpha + "\t" + (String)beta);
+  #endif
+
+}
+
+
+// Het berekenen van de x,y,z coordinaten van de voet op basis van de gegeven hoek.
+
+
+
+
