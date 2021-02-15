@@ -44,9 +44,7 @@ SEND_DATA_STRUCTURE txdata;
 unsigned long previousMillis = 0;
 const long interval = 40;
 
-unsigned long previousDispMillis = 0;
-const long Dispinterval = 10;
-
+long previousSafetyMillis;
 
 void setup() {
 
@@ -64,6 +62,7 @@ void setup() {
   pinMode(JOY_BUT1, INPUT_PULLDOWN);
 
   setupMPU();
+  DBGSerial.println("Setup Complete!");
 
 
 }
@@ -74,13 +73,6 @@ void loop() {
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {  // start timed event for read and send
     previousMillis = currentMillis;
-
-    if (counter != rxdata.counter) {
-      counter = rxdata.counter;
-      nextionStatusText(1);
-    } else {
-      nextionStatusText(0);
-    }
 
     txdata.joyBut1 = digitalRead(JOY_BUT1);
     txdata.Yas1 = analogRead(A0);
@@ -102,19 +94,31 @@ void loop() {
     nextionSetNumber("xas3", txdata.AcY);
 
     ETout.sendData();
-
-  }
-
-  if (currentMillis - previousDispMillis >= Dispinterval) {  // start timed event for read and send
-    previousDispMillis = currentMillis;
-
-
     if (ETin.receiveData()) {
+
+      previousSafetyMillis = currentMillis;
 
       // Send data to Nextion display
       nextionCounter(rxdata.counter);
       nextionSetNumber("yas4", rxdata.AcX);
       nextionSetNumber("xas4", rxdata.AcY);
+
+      
     }
+
+    // If no data has been receinced in 200ms this function will start
+    else if (currentMillis - previousSafetyMillis > 200) {
+      DBGSerial.print("*no data* ");
+      nextionStatusText(0);
+    }
+
+    else {
+      counter = rxdata.counter;
+      nextionStatusText(1);
+    }
+
+
+    DBGSerial.print("C = "); DBGSerial.println(rxdata.counter);
   }
+
 }
